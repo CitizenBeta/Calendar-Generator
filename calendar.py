@@ -2,7 +2,7 @@
 # Author: Zhang Anjun
 # Date: 2025-03-12
 # Description: A calendar generator
-# Version: 0.2
+# Version: 1.0
 # © 2025 Zhang Anjun. All rights reserved.
 
 # Shared functions
@@ -73,6 +73,7 @@ def prompt():
         print("Please enter a valid month")
         prompt()
     print("")
+    print("Calendar for", m, "-", y)
     calendar(m, y)
 
 def row(week, d, m, y):
@@ -93,12 +94,12 @@ def row(week, d, m, y):
 
     d = d + week
     while d <= maxDays(m, y):
-        if d > 10:
-            print(" ", d, " ", end="")
-        elif d <= 10 and d > 0:
-            print("  ", d, " ", end="")
+        if d >= 10:
+            print("  ", d, " ", end="", sep="")
+        elif d < 10 and d > 0:
+            print("   ", d, " ", end="", sep="")
         elif d <= 0:
-            print("     ", end="")
+            print("     ", end="", sep="")
         d = d + 7
     print("")
 
