@@ -2,7 +2,7 @@
 # Author: Zhang Anjun
 # Date: 2025-03-12
 # Description: A calendar generator
-# Version: 0.1
+# Version: 0.2
 # © 2025 Zhang Anjun. All rights reserved.
 
 # Shared functions
@@ -72,12 +72,35 @@ def prompt():
         print("Please enter a valid month and year")
         prompt()
 
-def row(week, m, y):
+def row(col, d, m, y):
+    if col == 1:
+        print("Monday", end="")
+    elif col == 2:
+        print("Tuesday", end="")
+    elif col == 3:
+        print("Wednesday", end="")
+    elif col == 4:
+        print("Thursday", end="")
+    elif col == 5:
+        print("Friday", end="")
+    elif col == 6:
+        print("Saturday", end="")
+    elif col == 7:
+        print("Sunday", end="")
     
-
+    while d <= maxDays(m, y):
+        if d >= 0:
+            print(" d ")
+        elif d < 0:
+            print("   ")
+        d = d + 7
+        
 
 def calendar(m, y):
-    d = (daysSince1900(1, m, y)) % 7
-    week = d * (-1)
+    whichDay = (daysSince1900(1, m, y)) % 7
+    d = whichDay * (-1) + 2
     fullMonth = maxDays(m, y)
-    row(week, m, y)
+    col = 1
+    while col != 8:
+        row(col, d, m, y)
+        col = col + 1
