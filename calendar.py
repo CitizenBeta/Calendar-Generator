@@ -64,43 +64,50 @@ def whatDayWasIt(d, m, y):
 
 # Calendar Generator
 def prompt():
-    m = input("Please enter a month")
-    y = input("Please enter a year")
-    if m <= 12 and m >= 1 and y >= 1900:
-        calendar(m, y)
-    else:
-        print("Please enter a valid month and year")
+    m = int(input("Please enter a month: "))
+    if not m >= 1 and m <= 12:
+        print("Please enter a valid month")
         prompt()
+    y = int(input("Please enter a year: "))
+    if y < 1900:
+        print("Please enter a valid month")
+        prompt()
+    print("")
+    calendar(m, y)
 
-def row(col, d, m, y):
-    if col == 1:
-        print("Monday", end="")
-    elif col == 2:
-        print("Tuesday", end="")
-    elif col == 3:
-        print("Wednesday", end="")
-    elif col == 4:
-        print("Thursday", end="")
-    elif col == 5:
-        print("Friday", end="")
-    elif col == 6:
-        print("Saturday", end="")
-    elif col == 7:
-        print("Sunday", end="")
-    
+def row(week, d, m, y):
+    if week == 1:
+        print("Monday    |", end="")
+    elif week == 2:
+        print("Tuesday   |", end="")
+    elif week == 3:
+        print("Wednesday |", end="")
+    elif week == 4:
+        print("Thursday  |", end="")
+    elif week == 5:
+        print("Friday    |", end="")
+    elif week == 6:
+        print("Saturday  |", end="")
+    elif week == 7:
+        print("Sunday    |", end="")
+
+    d = d + week
     while d <= maxDays(m, y):
-        if d >= 0:
-            print(" d ")
-        elif d < 0:
-            print("   ")
+        if d > 10:
+            print(" ", d, " ", end="")
+        elif d <= 10 and d > 0:
+            print("  ", d, " ", end="")
+        elif d <= 0:
+            print("     ", end="")
         d = d + 7
-        
+    print("")
 
 def calendar(m, y):
     whichDay = (daysSince1900(1, m, y)) % 7
-    d = whichDay * (-1) + 2
-    fullMonth = maxDays(m, y)
-    col = 1
-    while col != 8:
-        row(col, d, m, y)
-        col = col + 1
+    d = whichDay * (-1) + 1
+    week = 1
+    while week != 8:
+        row(week, d, m, y)
+        week = week + 1
+
+prompt()
