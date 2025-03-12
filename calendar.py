@@ -2,7 +2,7 @@
 # Author: Zhang Anjun
 # Date: 2025-03-12
 # Description: A calendar generator
-# Version: 1.0
+# Version: 1.1
 # © 2025 Zhang Anjun. All rights reserved.
 
 # Shared functions
@@ -45,38 +45,21 @@ def daysInFullMonthsBefore(m, y):
 def daysSince1900(d, m, y):
     return daysInFullYearsBefore(y) + daysInFullMonthsBefore(m, y) + d
 
-def whatDayWasIt(d, m, y):
-    n = daysSince1900(d, m, y)
-    if n % 7 == 1:
-        return "Monday"
-    elif n % 7 == 2:
-        return "Tuesday"
-    elif n % 7 == 3:
-        return "Wednesday"
-    elif n % 7 == 4:
-        return "Thursday"
-    elif n % 7 == 5:
-        return "Friday"
-    elif n % 7 == 6:
-        return "Saturday"
-    elif n % 7 == 0:
-        return "Sunday"
-
 # Calendar Generator
 def prompt():
-    m = int(input("Please enter a month: "))
+    m = int(input("Enter a month (1-12): "))
     if not m >= 1 and m <= 12:
-        print("Please enter a valid month")
+        print("Invalid month. Please try again.")
         prompt()
-    y = int(input("Please enter a year: "))
+    y = int(input("Enter a year (after 1900): "))
     if y < 1900:
-        print("Please enter a valid month")
+        print("Invalid year. Please try again.")
         prompt()
     print("")
-    print("Calendar for", m, "-", y)
+    print("Calendar for ", m, "-", y, sep="")
     calendar(m, y)
 
-def row(week, d, m, y):
+def printWeek(week):
     if week == 1:
         print("Monday    |", end="")
     elif week == 2:
@@ -92,14 +75,19 @@ def row(week, d, m, y):
     elif week == 7:
         print("Sunday    |", end="")
 
+def printDate(d):
+    if d >= 10:
+        print("  ", d, " ", end="", sep="")
+    elif d < 10 and d > 0:
+        print("   ", d, " ", end="", sep="")
+    elif d <= 0:
+        print("     ", end="", sep="")
+    
+def printRow(week, d, m, y):
+    printWeek(week)
     d = d + week
     while d <= maxDays(m, y):
-        if d >= 10:
-            print("  ", d, " ", end="", sep="")
-        elif d < 10 and d > 0:
-            print("   ", d, " ", end="", sep="")
-        elif d <= 0:
-            print("     ", end="", sep="")
+        printDate(d)
         d = d + 7
     print("")
 
@@ -108,7 +96,9 @@ def calendar(m, y):
     d = whichDay * (-1) + 1
     week = 1
     while week != 8:
-        row(week, d, m, y)
+        printRow(week, d, m, y)
         week = week + 1
 
 prompt()
+print("")
+input("Press Enter to exit ")
