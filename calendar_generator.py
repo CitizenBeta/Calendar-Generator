@@ -1,8 +1,8 @@
-# File Name: calendar.py
+# File Name: calendar_generator.py
 # Author: Zhang Anjun
-# Date: 2025-03-12
-# Description: A calendar generator
-# Version: 1.1
+# Date: 2025-03-13
+# Description: Calendar generator
+# Version: 1.1.1
 # © 2025 Zhang Anjun. All rights reserved.
 
 # Shared functions
