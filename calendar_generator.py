@@ -1,28 +1,30 @@
 # File Name: calendar_generator.py
 # Author: Zhang Anjun
-# Date: 2025-03-13
+# Date: 2025-03-14
 # Description: Calendar generator
-# Version: 1.2
+# Version: 1.3
 # © 2025 Zhang Anjun. All rights reserved.
 
-# Shared functions. Copied from handouts
+# Shared functions
 def leap(y):
-    if (((y%4 == 0) and (y%100 != 0)) or (y%400 == 0)):
-        return True
-    else:
-        return False
+    # Leap year is divisible by 4 but not by 100 or it is divisible by 400
+    return (((y%4 == 0) and (y%100 != 0)) or (y%400 == 0))
     
 def maxDays(m, y):
+    # Months with 31 days
     if ((m == 1) or (m == 3) or (m == 5) or (m == 7) or (m == 8) or (m == 10) or (m == 12)):
         return 31
+    # Months with 30 days
     elif ((m == 4) or (m == 6) or (m == 9) or (m == 11)):
         return 30
+    # February has 29 days if leap year, otherwise 28 days
     elif (m == 2):
         if leap(y):
             return 29
         else:
             return 28
-        
+
+# Calculate the number of days from 1900
 def daysInFullYearsBefore(y):
     total = 0
     i = 1900
@@ -34,6 +36,7 @@ def daysInFullYearsBefore(y):
         i = i + 1
     return total
 
+# Calculate the number of days from January
 def daysInFullMonthsBefore(m, y):
     total = 0
     i = 1
@@ -42,6 +45,7 @@ def daysInFullMonthsBefore(m, y):
         i = i + 1
     return total
 
+# Calculate the total number of days from 1-1-1900
 def daysSince1900(d, m, y):
     return daysInFullYearsBefore(y) + daysInFullMonthsBefore(m, y) + d
 
@@ -122,7 +126,6 @@ def calendar(m, y):
     # We use daysSince1900(1, m, y) % 7. However, we need Monday to be 0 for correct alignment
     # Without adjusting by "(daysSince1900(1, m, y) - 1", Sunday is 7 and (7 % 7 == 0) which incorrectly moves Sunday to Monday
     # Finally, by multipling (-1) we can get the first day of the month (offset)
-
     d = ((daysSince1900(1, m, y) - 1) % 7) * (-1)
 
     weekday = 1
@@ -135,4 +138,4 @@ def calendar(m, y):
 # Start the program
 prompt()
 print("")
-input("Press Enter to exit ")
+input("Press Enter to exit. ")
