@@ -2,9 +2,17 @@
 # Author: Zhang Anjun
 # Date: 2025-03-14
 # Description: Calendar generator
-# Version: 1.3
+# Version: 1.4
 # © 2025 Zhang Anjun. All rights reserved.
 from sys import exit
+
+# Copyright notice
+def copyrightNotice():
+    print("")
+    print("Author: Zhang Anjun")
+    print("Version: 1.4")
+    print("© 2025 Zhang Anjun. All rights reserved.")
+    print("")
 
 # Shared functions
 def leap(y):
@@ -55,17 +63,15 @@ def daysSince1900(d, m, y):
 def prompt():
     m = int(input("Enter a month (1-12): "))
     # Verify month input
-    # If the month is not valid, ask user to input again
     if m < 1 or m > 12:
-        print("Invalid month. Please try again.")
-        prompt()
+        print("Invalid month.")
+        exit(0)
     
     # Verify year input
-    # If the year is not valid (before 1900), ask user to input again
     y = int(input("Enter a year (after 1900): "))
     if y < 1900:
-        print("Invalid year. Please try again.")
-        prompt()
+        print("Invalid year.")
+        exit(0)
     
     print("")
     # Display the title with the month and year
@@ -138,6 +144,6 @@ def calendar(m, y):
 
 # Start the program
 prompt()
-print("")
+copyrightNotice()
 input("Press Enter to exit. ")
 exit(0)
