@@ -1,2 +1,2 @@
-nuitka --standalone --onefile --msvc --show-memory --show-progress --output-dir=nuitka --remove-output ..\calendar.py
+nuitka --standalone --onefile --msvc=latest --show-memory --show-progress --output-dir=nuitka --remove-output ..\calendar_generator.py
 pause
