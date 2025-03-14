@@ -4,6 +4,7 @@
 # Description: Calendar generator
 # Version: 1.3
 # © 2025 Zhang Anjun. All rights reserved.
+from sys import exit
 
 # Shared functions
 def leap(y):
@@ -139,3 +140,4 @@ def calendar(m, y):
 prompt()
 print("")
 input("Press Enter to exit. ")
+exit(0)
